@@ -1,4 +1,7 @@
 from .views import (
     BookListView,
-    BookCreateView
+    BookCreateView,
+    BookDetailView,
+    BookUpdateView,
+    BookDeleteView
 )

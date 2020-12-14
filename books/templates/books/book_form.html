@@ -48,11 +48,10 @@
 
     <div class="row">
         <div class="col">
-            <label>Book Cover:</label>
-            <div class="custom-file">
-              {{ form.image.errors }}
-              <label class="custom-file-label" for="{{ form.image.id_for_label }}">Choose Image...</label>
-              {{ form.image }}
+            <div class="form-group">
+                {{ form.image.errors }}
+                <label for="{{ form.image.id_for_label }}">Book Cover:</label>
+                {{ form.image }}
             </div>
         </div>
         <div class="col">
@@ -60,7 +59,6 @@
               {{ form.author.errors }}
               <label for="{{ form.author.id_for_label }}">Author:</label>
               <select name="author" class="form-control" id="id_author">
-                <option value="">---------</option>
                 {% for value,author in form.author.field.choices %}
                     <option value="{{ value }}">{{ author }}</option>
                 {% endfor %}

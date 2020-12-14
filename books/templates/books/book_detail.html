@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-md-11">
+         <article class="media content-section">
+            <div class="media-body">
+                <hr>
+               <div class="article-metadata">
+                   <h5 class="book-title">Title: {{ object.title }}</h5>
+                   <span class="book-author">Author: {{ object.author.all.0 }}</span>
+               </div>
+                <hr>
+                <img class="book-cover" src="{{ object.image.url }}" width="200" height="300"/>
+                <p>Description:</p>
+                <p class="book-description">{{ object.description }}</p>
+
+                <div class="book-data">
+                    <hr>
+                    <p>Genre: {{ object.genre }}</p>
+                    <p>Price: {{ object.price }} PLN</p>
+                    <p>Publication Year: {{ object.publication_year }}</p>
+                    <p>Rating: {{ object.rating }}/10</p>
+                </div>
+            </div>
+
+         </article>
+
+         <hr>
+
+         {% if user.is_authenticated %}
+             <div class="buttons-panel">
+                <a class="btn btn-primary" href="{% url 'book-update' object.pk %}" role="button">Update</a>
+                <a class="btn btn-danger" href="{% url 'book-delete' object.pk %}" role="button">Delete</a>
+             </div>
+        {% endif %}
+    </div>
+{% endblock %}

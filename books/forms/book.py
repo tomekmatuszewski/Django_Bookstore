@@ -14,6 +14,6 @@ class BookForm(ModelForm):
         super().__init__(*args, **kwargs)
         for visible in self.visible_fields():
             if isinstance(visible.field, ImageField):
-                visible.field.widget.attrs['class'] = 'custom-file-input'
+                pass
             else:
                 visible.field.widget.attrs['class'] = 'form-control'

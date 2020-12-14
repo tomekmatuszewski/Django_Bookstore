@@ -4,6 +4,21 @@ body {
 
 
 .navbar{
-    background-color: #e25a64;
+    background-color: #706d6d;
 }
 
+.navbar-brand{
+    font-family: 'Lobster', cursive;
+    font-size: 1.5rem;
+}
+
+footer{
+    text-align: center;
+    margin-top: 10%;
+
+}
+
+.jumbotron{
+    padding: 20px;
+    background-color: #e9e6e6;
+}

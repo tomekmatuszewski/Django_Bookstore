@@ -1,16 +1,43 @@
-.row{
+/*books-list*/
+
+#book-list {
     display: flex;
-    width: 90%;
+    flex-wrap: wrap;
     margin-top: 30px;
+    margin-bottom: 10%;
+
 }
 
-.column{
+#book-list .column{
     flex: 33.33%;
-    padding: 5px;
+    text-align: center;
+    padding: 15px;
 }
+
+#book-list img{
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
+#book-list .book-detail-a{
+    display: block;
+    text-decoration: none;
+    color: black;
+
+}
+
+#book-list .book-detail-a:hover{
+    color: #8d5b6b;
+}
+
+#book-list .jumbotron{
+    padding: 10px;
+    background-color: #e9e6e6;
+}
+
 
 @media screen and (max-width: 500px) {
-  .column {
+  .books-list .column {
     width: 100%;
   }
 }
@@ -33,5 +60,49 @@
     padding: 5px;
 }
 
-.book_form .custom-file-input{
+/*detail*/
+
+article .book-cover{
+    float: left;
+    margin-right: 10px;
+}
+
+article .book-description{
+    font-size: 0.9rem;
+    text-align: justify;
+
+}
+
+article .book-cover{
+    margin-bottom: 20px;
+}
+
+article .book-data{
+    clear: both;
+}
+
+article .book-title{
+    display: inline;
+}
+
+article .book-author{
+    float: right;
+
+}
+
+/*button - paginate*/
+
+.buttons-paginate a{
+    border-color: #706d6d;
+    color: #706d6d;
+}
+
+.buttons-paginate a:hover{
+    border-color: #706d6d;
+    background-color: #706d6d;
+}
+
+.buttons-paginate .btn-info{
+    color: white;
+    background-color: #706d6d;
 }
