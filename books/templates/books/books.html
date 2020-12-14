@@ -16,18 +16,30 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col-md-2 mt-5">
+
+    <div class="col-md-3 mt-5">
         <div class="jumbotron">
             <h5>Filters</h5>
             <form method="post">
-                {% csrf_token %}
-                <label>Author</label>
-                <select>
-                    <option>----------------</option>
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label class="mt-2">Author</label>
+                    <select class="form-control">
+                        {% for author in authors %}
+                            <option>{{ author }}</option>
+                        {% endfor %}
+                    </select>
 
-                </select>
+                    <label class="mt-2">Genre</label>
+                    <select class="form-control">
+                        {% for genre in genres %}
+                            <option>{{ genre }}</option>
+                        {% endfor %}
+                    </select>
 
-                <input type="submit" class="btn btn-primary"/>
+
+                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                </div>
             </form>
         </div>
     </div>

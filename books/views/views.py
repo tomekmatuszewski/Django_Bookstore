@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from books.models import Book
+from books.models import Book, Genre, Author
 from books.forms import BookForm
 
 
@@ -10,6 +10,12 @@ class BookListView(ListView):
     context_object_name = "books"
     ordering = ["title"]
     paginate_by = 6
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genres'] = Genre.objects.all()
+        context['authors'] = Author.objects.all()
+        return context
 
 
 class BookCreateView(CreateView):
