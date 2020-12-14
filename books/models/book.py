@@ -24,7 +24,7 @@ class Book(models.Model):
     title = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image = models.ImageField(upload_to="book_pics", default="default.png", help_text="Min. size 300x300")
-    publishment_year = models.IntegerField()
+    publication_year = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     rating = models.IntegerField()
     genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name='genre')
