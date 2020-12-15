@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'books.apps.BooksConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,8 +127,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
-# LOGIN_REDIRECT_URL = "home"
-# LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "login"
 
 if DEBUG:
     STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
