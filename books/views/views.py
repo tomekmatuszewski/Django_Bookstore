@@ -10,7 +10,7 @@ class BookListView(ListView):
     template_name = "books/books.html"
     context_object_name = "books"
     ordering = ["title"]
-    paginate_by = 3
+    paginate_by = 6
 
     def get_queryset(self):
         genre = self.request.GET.get('genre')
