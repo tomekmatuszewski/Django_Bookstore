@@ -9,9 +9,15 @@
 }
 
 #book-list .column{
-    flex: 33.33%;
+    margin-right: 20px;
     text-align: center;
     padding: 15px;
+}
+
+#book-list .book-price-rating p{
+    margin-top: 5px;
+    margin-left: 2px;
+    text-align: left;
 }
 
 #book-list img{

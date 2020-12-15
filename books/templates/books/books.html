@@ -11,6 +11,10 @@
                     <div class="jumbotron">
                         <a class="book-detail-a" href="{% url 'book-detail' book.pk %}">{{ book.title }}</a>
                         <img src="{{ book.image.url }}" width="200" height="300"/>
+                        <div class="book-price-rating">
+                            <p>Price {{ book.price }} PLN</p>
+                            <p>Rating {{ book.rating }}/10</p>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -20,25 +24,36 @@
     <div class="col-md-3 mt-5">
         <div class="jumbotron">
             <h5>Filters</h5>
-            <form method="post">
+            <form method="get">
                 <div class="form-group">
-                    {% csrf_token %}
-                    <label class="mt-2">Author</label>
-                    <select class="form-control">
+{#                    {% csrf_token %}#}
+                    <label for="pagination">Books on page</label>
+                    <select id="pagination" name="paginate_by" class="form-control">
+                        <option></option>
+                        <option value="1">1</option>
+                        <option value="3">3</option>
+                        <option value="6">6</option>
+                        <option value="9">9</option>
+                        <option value="12">12</option>
+                    </select>
+                    <label for="author" class="mt-2">Author</label>
+                    <select id="author" name="author" class="form-control">
+                        <option></option>
                         {% for author in authors %}
                             <option>{{ author }}</option>
                         {% endfor %}
                     </select>
 
-                    <label class="mt-2">Genre</label>
-                    <select class="form-control">
+                    <label for="genre" class="mt-2">Genre</label>
+                    <select id="genre" name="genre" class="form-control">
+                        <option></option>
                         {% for genre in genres %}
                             <option>{{ genre }}</option>
                         {% endfor %}
                     </select>
 
 
-                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                    <button onclick="addPagination();" type="submit" class="btn btn-primary mt-4">Submit</button>
                 </div>
             </form>
         </div>
