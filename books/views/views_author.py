@@ -32,7 +32,7 @@ class AuthorUpdateView(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Author
     template_name = "books/form_author_genre.html"
     fields = '__all__'
-    success_url = reverse_lazy('bookstore')
+    success_url = reverse_lazy('authors')
     permission_required = 'books.change_author'
 
     def form_valid(self, form):

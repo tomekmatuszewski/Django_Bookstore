@@ -118,9 +118,14 @@ article .book-author{
      margin-top: 20px;
 }
 
+.book-form-content{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 /*genre-authors table*/
 
 table{
     text-align: center;
     vertical-align: middle;
+    font-family: 'Josefin Sans', sans-serif;
 }

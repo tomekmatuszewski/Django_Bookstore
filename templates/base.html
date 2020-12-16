@@ -28,7 +28,7 @@
     <body>
          <!-- Navigation -->
          <nav class="navbar navbar-expand-lg navbar-dark">
-          <a class="navbar-brand" href="#">Bookstore</a>
+          <a class="navbar-brand" href="{% url 'bookstore' %}">Bookstore</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -48,7 +48,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'bookstore' %}">Books</a>
                   <a class="dropdown-item" href="{% url 'authors' %}">Authors</a>
-                  <a class="dropdown-item" href="#">Genres</a>
+                  <a class="dropdown-item" href="{% url 'genres' %}">Genres</a>
                   <hr>
                     {% if user|has_group:"Moderators" or user.is_staff %}
                       <a class="dropdown-item" href="{% url 'book-add' %}">Add Book</a>
