@@ -54,17 +54,17 @@
                     {{ form.image }}
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-                  {{ form.author.errors }}
-                  <label for="{{ form.author.id_for_label }}">Author:</label>
-                  <select name="author" class="form-control" id="id_author">
-                    {% for value,author in form.author.field.choices %}
-                        <option value="{{ value }}">{{ author }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
+        <div class="col">
+            <div class="form-group">
+              {{ form.authors.errors }}
+              <label for="{{ form.authors.id_for_label }}">Author:</label>
+              <select name="authors" class="form-control" id="id_authors">
+                {% for value,author in form.authors.field.choices %}
+                    <option value="{{ value }}">{{ author }}</option>
+                {% endfor %}
+              </select>
             </div>
+        </div>
         </div>
 
 

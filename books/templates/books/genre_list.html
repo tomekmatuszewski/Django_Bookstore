@@ -10,6 +10,7 @@
                  <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        <th scope="col">Books on Stock</th>
                         <th scope="col">Edit / Delete</th>
                     </tr>
                  </thead>
@@ -17,6 +18,7 @@
                     {% for genre in genres %}
                         <tr>
                             <td>{{ genre.name }}</td>
+                            <td>{{ genre.books.all|length }}</td>
                             <td>
                                 {% if user|has_group:"Moderators" or user.is_staff %}
                                     <a href="{% url 'genre-update' genre.pk %}" class="btn btn-light btn-sm mr-2">

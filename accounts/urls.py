@@ -1,5 +1,5 @@
 from django.urls import path
-from accounts.views import SignUpView, MyLoginView, PasswordChangeViewOwn, UserUpdateView
+from accounts.views import SignUpView, MyLoginView, PasswordChangeViewOwn, UserUpdateView, UserDeleteView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     path('bookstore/password-change/', PasswordChangeViewOwn.as_view(), name="password-change"),
     path('bookstore/log-out/', LogoutView.as_view(template_name="accounts/logout.html"), name="logout"),
     path('bookstore/account/<int:pk>/update', UserUpdateView.as_view(), name="user-update"),
+    path('bookstore/account/<int:pk>/delete', UserDeleteView.as_view(), name="user-delete"),
 
 ]

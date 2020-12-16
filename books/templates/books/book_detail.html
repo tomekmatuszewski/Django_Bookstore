@@ -7,7 +7,7 @@
                 <hr>
                <div class="article-metadata">
                    <h5 class="book-title">Title: {{ object.title }}</h5>
-                   <span class="book-author">Author: {{ object.author.all.0 }}</span>
+                   <span class="book-author">Author: {{ object.authors.all.0 }}</span>
                </div>
                 <hr>
                 <img class="book-cover" src="{{ object.image.url }}" width="200" height="300"/>

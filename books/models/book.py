@@ -27,8 +27,8 @@ class Book(models.Model):
     publication_year = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     rating = models.IntegerField()
-    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name='genre')
-    author = models.ManyToManyField(Author, related_name='authors')
+    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name='books')
+    authors = models.ManyToManyField(Author, related_name='books')
 
     def __str__(self):
         return self.title

@@ -27,8 +27,8 @@ class BookListView(LoginRequiredMixin, ListView):
         elif author:
             first_name = author.split(' ')[0]
             last_name = author.split(' ')[1]
-            new_context = self.model.objects.filter(author=Author.objects.get(first_name=first_name,
-                                                                              last_name=last_name))
+            new_context = self.model.objects.filter(authors=Author.objects.get(first_name=first_name,
+                                                                               last_name=last_name))
             return new_context
         else:
             return super().get_queryset()
@@ -71,5 +71,3 @@ class BookDeleteView(StaffRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Book
     template_name = "books/book_delete.html"
     success_url = reverse_lazy('books')
-
-
