@@ -1,11 +1,17 @@
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from books.models import Book, Genre, Author
 from books.forms import BookForm
 
 
+class StaffRequiredMixin(UserPassesTestMixin):
 
-class BookListView(ListView):
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class BookListView(LoginRequiredMixin, ListView):
     model = Book
     template_name = "books/books.html"
     context_object_name = "books"
@@ -38,28 +44,32 @@ class BookListView(ListView):
         return self.request.GET.get('paginate_by', self.paginate_by)
 
 
-class BookCreateView(CreateView):
+class BookCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
     template_name = "books/book_form.html"
     success_url = reverse_lazy('bookstore')
+    permission_required = 'books.add_book'
 
 
-class BookDetailView(DetailView):
+class BookDetailView(LoginRequiredMixin, DetailView):
     model = Book
     template_name = "books/book_detail.html"
 
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
     template_name = "books/book_form.html"
+    permission_required = 'books.change_book'
 
     def get_success_url(self):
         return reverse_lazy('book-detail', kwargs={'pk': self.request.object.pk})
 
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(StaffRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Book
     template_name = "books/book_delete.html"
     success_url = reverse_lazy('books')
+
+

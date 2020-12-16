@@ -112,3 +112,8 @@ article .book-author{
     color: white;
     background-color: #706d6d;
 }
+
+.common-form{
+     font-family: 'Josefin Sans', sans-serif;
+     margin-top: 20px;
+}

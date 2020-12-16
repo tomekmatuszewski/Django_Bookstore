@@ -12,14 +12,12 @@ class SingUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ['username', 'first_name']
 
-    image = ImageField()
 
     @atomic
     def save(self, commit=True):
         self.instance.is_active = False
         result = super().save(commit)
-        image = self.cleaned_data['image']
-        profile = Profile(image=image, user=result)
+        profile = Profile(user=result)
         if commit:
             profile.save()
         return result
