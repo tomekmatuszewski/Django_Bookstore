@@ -8,9 +8,15 @@ Project created in Django
     - pip install -r requirements.txt
     - python3 manage.py migrate
     - python manage.py loaddata books.json
+    - create superuser !
+    - panel admin -> create Group Moderators:
+        * Moderators -> permissions to add and update Genre, Author, Book
+        * stuff -> permissions to all above and delete
+        * superuser -> all permissions
+        * common user -> only browsing
     - python3 manage.py runserver
-    - http://127.0.0.1:8000/
-    - register and login
+    - http://127.0.0.1:8000/home
+    - register and login (superuser must activate new user)
 
 Some screens:
 
