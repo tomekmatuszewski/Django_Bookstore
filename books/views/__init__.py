@@ -6,5 +6,5 @@ from .views_book import (
     BookDeleteView
 )
 
-from .views_author import AuthorCreateView
+from .views_author import AuthorCreateView, AuthorListView, AuthorUpdateView, AuthorDeleteView
 from .views_genre import GenreCreateView

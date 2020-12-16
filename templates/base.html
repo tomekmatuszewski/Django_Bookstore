@@ -47,14 +47,15 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'bookstore' %}">Books</a>
+                  <a class="dropdown-item" href="{% url 'authors' %}">Authors</a>
+                  <a class="dropdown-item" href="#">Genres</a>
+                  <hr>
                     {% if user|has_group:"Moderators" or user.is_staff %}
                       <a class="dropdown-item" href="{% url 'book-add' %}">Add Book</a>
                       <a class="dropdown-item" href="{% url 'author-add' %}">Add Author</a>
                       <a class="dropdown-item" href="{% url 'genre-add' %}">Add Genre</a>
                     {% endif %}
-                  <div class="dropdown-divider">
 
-                  </div>
                 </div>
               </li>
             </ul>

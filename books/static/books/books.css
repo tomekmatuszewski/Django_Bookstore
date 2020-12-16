@@ -117,3 +117,10 @@ article .book-author{
      font-family: 'Josefin Sans', sans-serif;
      margin-top: 20px;
 }
+
+/*genre-authors table*/
+
+table{
+    text-align: center;
+    vertical-align: middle;
+}
