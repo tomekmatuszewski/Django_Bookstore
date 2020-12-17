@@ -26,7 +26,7 @@
             <h5>Filters</h5>
             <form method="get">
                 <div class="form-group">
-                    {% csrf_token %}
+{#                    {% csrf_token %}#}
                     <label for="pagination">Books on page</label>
                     <select id="pagination" name="paginate_by" class="form-control">
                         <option value="6">6</option>
@@ -36,6 +36,8 @@
                         <option value="12">12</option>
                         <option value="18">18</option>
                     </select>
+                    <label for="title">Title</label>
+                    <input id="title" name="title" class="form-control"/>
                     <label for="author" class="mt-2">Author</label>
                     <select id="author" name="author" class="form-control">
                         <option></option>
@@ -52,6 +54,10 @@
                         {% endfor %}
                     </select>
 
+                    <label for="min-rating">Min. Rating</label>
+                    <input id="min-rating" name="rating-min" class="form-control"/>
+                    <label for="max-rating">Max. Rating</label>
+                    <input id="max-rating" name="rating-max" class="form-control"/>
 
                     <button type="submit" class="btn btn-primary mt-4">Submit</button>
                 </div>

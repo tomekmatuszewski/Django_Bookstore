@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from books.models import Book, Author
-from django.forms import IntegerField, ModelMultipleChoiceField, ImageField
+from django.forms import DecimalField, ModelMultipleChoiceField, ImageField
 
 
 class BookForm(ModelForm):
@@ -8,7 +8,7 @@ class BookForm(ModelForm):
         model = Book
         fields = "__all__"
 
-    rating = IntegerField(min_value=1, max_value=10)
+    rating = DecimalField(decimal_places=1, min_value=1.0, max_value=10)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

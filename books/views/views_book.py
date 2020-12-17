@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from books.models import Book, Genre, Author
 from books.forms import BookForm
-
+from .books_filters import filter_books
 
 class StaffRequiredMixin(UserPassesTestMixin):
 
@@ -21,15 +21,12 @@ class BookListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         genre = self.request.GET.get('genre')
         author = self.request.GET.get('author')
-        if genre:
-            new_context = self.model.objects.filter(genre=Genre.objects.get(name=genre))
-            return new_context
-        elif author:
-            first_name = author.split(' ')[0]
-            last_name = author.split(' ')[1]
-            new_context = self.model.objects.filter(authors=Author.objects.get(first_name=first_name,
-                                                                               last_name=last_name))
-            return new_context
+        title = self.request.GET.get('title')
+        min_rating = self.request.GET.get('rating-min')
+        max_rating = self.request.GET.get('rating-max')
+        context = filter_books(genre=genre, author=author, title=title, max_rating=max_rating, min_rating=min_rating)
+        if context:
+            return context
         else:
             return super().get_queryset()
 

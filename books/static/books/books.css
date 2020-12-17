@@ -4,6 +4,15 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
+.sidebar label{
+    margin-top: 10px;
+}
+
+
+.sidebar #max-rating, .sidebar #min-rating{
+    width: 60%;
+}
+
 
 #book-list {
     display: flex;
