@@ -1,26 +1,27 @@
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib import messages
-from accounts.forms import SingUpForm, UserUpdateForm, ProfileUpdateForm
+from django.views.generic import CreateView, DeleteView, UpdateView
+
+from accounts.forms import ProfileUpdateForm, SingUpForm, UserUpdateForm
 
 
 class SignUpView(CreateView):
-    template_name = 'accounts/form_signup.html'
+    template_name = "accounts/form_signup.html"
     form_class = SingUpForm
-    success_url = reverse_lazy('bookstore')
+    success_url = reverse_lazy("bookstore")
 
 
 class MyLoginView(LoginView):
-    template_name = 'accounts/form_login.html'
+    template_name = "accounts/form_login.html"
 
 
 class PasswordChangeViewOwn(LoginRequiredMixin, PasswordChangeView):
 
-    template_name = 'accounts/form_password_change.html'
+    template_name = "accounts/form_password_change.html"
     success_url = reverse_lazy("bookstore")
 
     def form_valid(self, form):
@@ -43,7 +44,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save() and profile_form.save()
             messages.success(request, f"Your account has been updated!")
-            return redirect('bookstore')
+            return redirect("bookstore")
 
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
@@ -72,4 +73,4 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         messages.error(self.request, "Your Account successfully deleted")
-        return reverse_lazy('bookstore')
+        return reverse_lazy("bookstore")

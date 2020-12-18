@@ -1,17 +1,14 @@
-from django.contrib.auth.forms import (
-    UserCreationForm
-)
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.transaction import atomic
+from django.forms import ImageField, ModelForm
 
 from accounts.models import Profile
-from django.forms import ImageField, ModelForm
-from django.db.transaction import atomic
 
 
 class SingUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        fields = ['username', 'first_name']
-
+        fields = ["username", "first_name"]
 
     @atomic
     def save(self, commit=True):
@@ -24,14 +21,12 @@ class SingUpForm(UserCreationForm):
 
 
 class UserUpdateForm(ModelForm):
-
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ["username", "first_name", "last_name", "email"]
 
 
 class ProfileUpdateForm(ModelForm):
-
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ["image"]

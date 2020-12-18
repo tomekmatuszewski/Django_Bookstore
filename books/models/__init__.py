@@ -1,1 +1,1 @@
-from .book import Genre, Author, Book
+from .book import Author, Book, Genre

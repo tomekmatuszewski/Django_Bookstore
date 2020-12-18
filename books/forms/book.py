@@ -1,6 +1,7 @@
-from django.forms import ModelForm
-from books.models import Book, Author
-from django.forms import DecimalField, ModelMultipleChoiceField, ImageField
+from django.forms import (DecimalField, ImageField, ModelForm,
+                          ModelMultipleChoiceField)
+
+from books.models import Author, Book
 
 
 class BookForm(ModelForm):
@@ -16,4 +17,4 @@ class BookForm(ModelForm):
             if isinstance(visible.field, ImageField):
                 pass
             else:
-                visible.field.widget.attrs['class'] = 'form-control'
+                visible.field.widget.attrs["class"] = "form-control"

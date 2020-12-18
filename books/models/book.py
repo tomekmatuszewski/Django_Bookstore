@@ -23,12 +23,14 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=150)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    image = models.ImageField(upload_to="book_pics", default="default.png", help_text="Min. size 300x300")
+    image = models.ImageField(
+        upload_to="book_pics", default="default.png", help_text="Min. size 300x300"
+    )
     publication_year = models.IntegerField()
     description = models.TextField(null=True, blank=True)
     rating = models.DecimalField(max_digits=3, decimal_places=1)
-    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name='books')
-    authors = models.ManyToManyField(Author, related_name='books')
+    genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name="books")
+    authors = models.ManyToManyField(Author, related_name="books")
 
     def __str__(self):
         return self.title

@@ -1,10 +1,6 @@
-from .views_book import (
-    BookListView,
-    BookCreateView,
-    BookDetailView,
-    BookUpdateView,
-    BookDeleteView
-)
-
-from .views_author import AuthorCreateView, AuthorListView, AuthorUpdateView, AuthorDeleteView
-from .views_genre import GenreCreateView, GenreListView, GenreUpdateView, GenreDeleteView
+from .views_author import (AuthorCreateView, AuthorDeleteView, AuthorListView,
+                           AuthorUpdateView)
+from .views_book import (BookCreateView, BookDeleteView, BookDetailView,
+                         BookListView, BookUpdateView)
+from .views_genre import (GenreCreateView, GenreDeleteView, GenreListView,
+                          GenreUpdateView)
