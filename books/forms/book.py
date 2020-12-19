@@ -1,4 +1,5 @@
-from django.forms import DecimalField, ImageField, ModelForm, ModelMultipleChoiceField
+from django.forms import (DecimalField, ImageField, ModelForm,
+                          ModelMultipleChoiceField)
 
 from books.models import Author, Book
 

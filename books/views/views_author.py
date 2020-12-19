@@ -1,9 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import (
-    LoginRequiredMixin,
-    PermissionRequiredMixin,
-    UserPassesTestMixin,
-)
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        PermissionRequiredMixin,
+                                        UserPassesTestMixin)
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
@@ -20,7 +18,6 @@ class AuthorCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = "books/form_author_genre.html"
     fields = "__all__"
     permission_required = "books.add_author"
-
 
     def get_success_url(self):
         messages.success(self.request, "New author successfully added")
