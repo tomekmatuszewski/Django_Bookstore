@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     UserPassesTestMixin,
 )
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -11,10 +12,10 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-
+from django.contrib import messages
 from books.forms import BookForm
 from books.models import Author, Book, Genre
-
+from django.http import HttpResponseRedirect
 from .books_filters import filter_books
 
 
@@ -80,6 +81,13 @@ class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("book-detail", kwargs={"pk": self.request.object.pk})
+
+    def get_permission_denied_message(self):
+        return messages.error(self.request, "You have no permission to update this book!")
+
+    def handle_no_permission(self):
+        self.get_permission_denied_message()
+        return HttpResponseRedirect(reverse_lazy('bookstore'))
 
 
 class BookDeleteView(StaffRequiredMixin, LoginRequiredMixin, DeleteView):

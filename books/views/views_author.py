@@ -21,6 +21,7 @@ class AuthorCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     fields = "__all__"
     permission_required = "books.add_author"
 
+
     def get_success_url(self):
         messages.success(self.request, "New author successfully added")
         return reverse_lazy("authors")
