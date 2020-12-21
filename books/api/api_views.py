@@ -35,6 +35,12 @@ class BookViewSet(ModelViewSet):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    def update(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
 
 class GenreViewSet(ModelViewSet):
     queryset = Genre.objects.all()
@@ -52,6 +58,12 @@ class GenreViewSet(ModelViewSet):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    def update(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
 
 class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
@@ -66,5 +78,11 @@ class AuthorViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         if request.user.is_staff:
             return super().destroy(request, *args, **kwargs)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_staff:
+            return super().create(request, *args, **kwargs)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
