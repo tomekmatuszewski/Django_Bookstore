@@ -26,7 +26,6 @@ class BookSerializer(ModelSerializer):
 
 
 class BookMiniSerializer(ModelSerializer):
-
     class Meta:
         model = Book
-        fields = ['id', 'title']
+        fields = ["id", "title"]

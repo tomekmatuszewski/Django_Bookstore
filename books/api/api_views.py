@@ -1,9 +1,11 @@
-from rest_framework import filters
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import filters, status
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
 from books.models import Author, Book, Genre
-from rest_framework import status
-from .serializers import AuthorSerializer, BookSerializer, GenreSerializer, BookMiniSerializer
+
+from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
+                          GenreSerializer)
 
 
 class BookViewSet(ModelViewSet):
