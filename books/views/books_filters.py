@@ -1,6 +1,18 @@
 from books.models import Author, Book, Genre
 
 
+def filter_rating(min_rating, max_rating):
+    if min_rating and not max_rating:
+        context = Book.objects.filter(rating__gte=min_rating)
+    elif max_rating and not min_rating:
+        context = Book.objects.filter(rating__lte=max_rating)
+    else:
+        context = Book.objects.filter(
+                rating__gte=min_rating, rating__lte=max_rating
+            )
+    return context
+
+
 def filter_books(
     genre: str = None,
     title: str = None,
@@ -32,10 +44,8 @@ def filter_books(
         elif author:
             context = Book.objects.filter(authors=author)
 
-        elif min_rating and max_rating:
-            context = Book.objects.filter(
-                rating__gte=min_rating, rating__lte=max_rating
-            )
+        elif min_rating or max_rating:
+            return filter_rating(min_rating, max_rating)
 
     if len(context.all()) == 0:
 
