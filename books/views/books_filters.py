@@ -7,9 +7,7 @@ def filter_rating(min_rating, max_rating):
     elif max_rating and not min_rating:
         context = Book.objects.filter(rating__lte=max_rating)
     else:
-        context = Book.objects.filter(
-                rating__gte=min_rating, rating__lte=max_rating
-            )
+        context = Book.objects.filter(rating__gte=min_rating, rating__lte=max_rating)
     return context
 
 
