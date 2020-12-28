@@ -31,6 +31,7 @@ class Book(models.Model):
     rating = models.DecimalField(max_digits=3, decimal_places=1)
     genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, related_name="books")
     authors = models.ManyToManyField(Author, related_name="books")
+    in_stock = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.title

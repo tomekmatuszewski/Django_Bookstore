@@ -6,6 +6,7 @@ from books.models import Author, Book, Genre
 
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
+from rest_framework.decorators import action
 
 
 class BookViewSet(ModelViewSet):
@@ -13,6 +14,14 @@ class BookViewSet(ModelViewSet):
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ["title", "genre__name", "authors__last_name"]
+
+    @action(detail=True, methods=['POST'])
+    def stock(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.in_stock = request.data.get("in_stock")
+        instance.save()
+        serializer = self.serializer_class(instance)
+        return Response(serializer.data)
 
     def list(self, request, *args, **kwargs):
         serializer = BookMiniSerializer(self.queryset, many=True)
