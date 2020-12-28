@@ -1,4 +1,5 @@
 from rest_framework import filters, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -6,7 +7,6 @@ from books.models import Author, Book, Genre
 
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
-from rest_framework.decorators import action
 
 
 class BookViewSet(ModelViewSet):
@@ -15,7 +15,7 @@ class BookViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ["title", "genre__name", "authors__last_name"]
 
-    @action(detail=True, methods=['POST'])
+    @action(detail=True, methods=["POST"])
     def stock(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.in_stock = request.data.get("in_stock")
