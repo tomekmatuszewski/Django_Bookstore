@@ -7,12 +7,14 @@ from books.models import Author, Book, Genre
 
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filter_fields = ['title', 'genre__name']
     search_fields = ["title", "genre__name", "authors__last_name"]
 
     @action(detail=True, methods=["POST"])
@@ -23,9 +25,9 @@ class BookViewSet(ModelViewSet):
         serializer = self.serializer_class(instance)
         return Response(serializer.data)
 
-    def list(self, request, *args, **kwargs):
-        serializer = BookMiniSerializer(self.queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request, *args, **kwargs):
+    #     serializer = BookMiniSerializer(self.queryset, many=True)
+    #     return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
