@@ -10,7 +10,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from books.forms import BookForm
 from books.models import Author, Book, Genre
 
-from .books_filters import filter_books, BookFilter
+from .books_filters import BookFilter, filter_books
 
 
 class StaffRequiredMixin(UserPassesTestMixin):

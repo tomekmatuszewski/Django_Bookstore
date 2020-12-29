@@ -143,3 +143,18 @@ table{
     vertical-align: middle;
     font-family: 'Josefin Sans', sans-serif;
 }
+
+
+#div_id_rating input{
+    display: inline-block;
+    width: 40%;
+}
+
+#div_id_rating input[name=rating_min]{
+    margin-right: 7px;
+}
+
+
+#div_id_rating input[name=rating_max]{
+    margin-left: 12px;
+}

@@ -2,14 +2,14 @@ from django.urls import path
 
 from books.views import (AuthorCreateView, AuthorDeleteView, AuthorListView,
                          AuthorUpdateView, BookCreateView, BookDeleteView,
-                         BookDetailView, BookListView, BookUpdateView,
-                         GenreCreateView, GenreDeleteView, GenreListView,
-                         GenreUpdateView, BookListViewDF)
+                         BookDetailView, BookListView, BookListViewDF,
+                         BookUpdateView, GenreCreateView, GenreDeleteView,
+                         GenreListView, GenreUpdateView)
 
 urlpatterns = [
     path("bookstore/books/", BookListView.as_view(), name="bookstore"),
     path("bookstore/book/add-book", BookCreateView.as_view(), name="book-add"),
-    path("bookstore/book/<int:pk>/", BookDetailView.as_view(), name="book-detail"),
+    path("bookstore/book/<int:pk>/", BookDetailView.as_view(), name="book-details"),
     path(
         "bookstore/book/<int:pk>/update/", BookUpdateView.as_view(), name="book-update"
     ),
@@ -40,5 +40,5 @@ urlpatterns = [
         GenreDeleteView.as_view(),
         name="genre-delete",
     ),
-    path("bookstore/books-df/", BookListViewDF.as_view(), name="bookstore_df")
+    path("bookstore/books-df/", BookListViewDF.as_view(), name="bookstore_df"),
 ]

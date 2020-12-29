@@ -9,7 +9,7 @@
             {% for book in books %}
                 <div class="column">
                     <div class="jumbotron">
-                        <a class="book-detail-a" href="{% url 'book-detail' book.pk %}">{{ book.title|truncatechars:25 }}</a>
+                        <a class="book-detail-a" href="{% url 'book-details' book.pk %}">{{ book.title|truncatechars:25 }}</a>
                         <img src="{{ book.image.url }}" width="200" height="300"/>
                         <div class="book-price-rating">
                             <p>Price {{ book.price }} PLN</p>

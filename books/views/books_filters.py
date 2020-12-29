@@ -1,12 +1,44 @@
-from books.models import Author, Book, Genre
 import django_filters
+from django_filters.widgets import RangeWidget
+
+from books.models import Author, Book, Genre
+
+# based on django filters
 
 
 class BookFilter(django_filters.FilterSet):
+
+    CHOICES = (("ascending", "Ascending"), ("descending", "Descending"))
+
+    title = django_filters.CharFilter(
+        label="Title", field_name="title", lookup_expr="icontains"
+    )
+
+    genre = django_filters.ModelChoiceFilter(
+        label="Genre", queryset=Genre.objects.all(), field_name="genre"
+    )
+    author = django_filters.ModelChoiceFilter(
+        label="Author", queryset=Author.objects.all(), field_name="authors"
+    )
+
+    ordering = django_filters.ChoiceFilter(
+        label="Ordering by Price", choices=CHOICES, method="filter_by_order"
+    )
+
+    rating = django_filters.RangeFilter(
+        label="Rating Between",
+        field_name="rating",
+        widget=RangeWidget(attrs={"class": "textinput textInput form-control"}),
+    )
+
     class Meta:
         model = Book
-        fields = ('title', 'rating', 'genre__name')
+        fields = ["title", "genre", "author", "rating"]
 
+    @staticmethod
+    def filter_by_order(queryset, name, value):
+        expression = "price" if value == "ascending" else "-price"
+        return queryset.order_by(expression)
 
 
 # own filters
@@ -55,7 +87,6 @@ def filter_books(
             return filter_rating(min_rating, max_rating)
 
     if len(context.all()) == 0:
-
         return Book.objects.none()
 
     return context
