@@ -1,7 +1,7 @@
 from books.models import Author, Book, Genre
 
 
-#own filters
+# own filters
 def filter_rating(min_rating, max_rating):
     if min_rating and not max_rating:
         context = Book.objects.filter(rating__gte=min_rating)

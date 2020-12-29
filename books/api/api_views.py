@@ -1,5 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -7,15 +9,21 @@ from books.models import Author, Book, Genre
 
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
-from django_filters.rest_framework import DjangoFilterBackend
+
+
+class StandardPagination(PageNumberPagination):
+    page_size = 5
+    max_page_size = 10
+    page_size_query_param = "page_size"
 
 
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
-    filter_fields = ['title', 'genre__name']
+    filter_fields = ["title", "genre__name"]
     search_fields = ["title", "genre__name", "authors__last_name"]
+    pagination_class = StandardPagination
 
     @action(detail=True, methods=["POST"])
     def stock(self, request, *args, **kwargs):

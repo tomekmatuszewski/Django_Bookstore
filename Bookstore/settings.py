@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
