@@ -6,7 +6,7 @@
 
     <div class="books col-md-9">
         <div id="book-list" class="row">
-            {% for book in books %}
+            {% for book in filter.qs %}
                 <div class="column">
                     <div class="jumbotron">
                         <a class="book-detail-a" href="{% url 'book-detail' book.pk %}">{{ book.title|truncatechars:25 }}</a>
@@ -24,45 +24,10 @@
     <div class="sidebar col-md-3 mt-5">
         <div class="jumbotron">
             <h5>Filters</h5>
-            <form method="get">
-                <div class="form-group">
-{#                    {% csrf_token %}#}
-                    <label for="pagination">Books on page</label>
-                    <select id="pagination" name="paginate_by" class="form-control">
-                        <option value="6">6</option>
-                        <option value="1">1</option>
-                        <option value="3">3</option>
-                        <option value="9">9</option>
-                        <option value="12">12</option>
-                        <option value="18">18</option>
-                    </select>
-                    <label for="title">Title</label>
-                    <input id="title" name="title" class="form-control"/>
-                    <label for="author" class="mt-2">Author</label>
-                    <select id="author" name="author" class="form-control">
-                        <option></option>
-                        {% for author in authors %}
-                            <option>{{ author }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <label for="genre" class="mt-2">Genre</label>
-                    <select id="genre" name="genre" class="form-control">
-                        <option></option>
-                        {% for genre in genres %}
-                            <option>{{ genre }}</option>
-                        {% endfor %}
-                    </select>
-
-                    <label for="min-rating">Min. Rating</label>
-                    <input id="min-rating" name="rating-min" class="form-control"/>
-                    <label for="max-rating">Max. Rating</label>
-                    <input id="max-rating" name="rating-max" class="form-control"/>
-
-                    <button type="submit" class="btn btn-primary mt-4">Submit</button>
-                </div>
+            <form method="GET">
+                {{ filter.form|crispy }}
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
             </form>
-
         </div>
     </div>
 

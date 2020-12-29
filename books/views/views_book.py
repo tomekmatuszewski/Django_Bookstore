@@ -10,7 +10,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from books.forms import BookForm
 from books.models import Author, Book, Genre
 
-from .books_filters import filter_books
+from .books_filters import filter_books, BookFilter
 
 
 class StaffRequiredMixin(UserPassesTestMixin):
@@ -47,6 +47,23 @@ class BookListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["genres"] = Genre.objects.all()
         context["authors"] = Author.objects.all()
+        return context
+
+    def get_paginate_by(self, queryset):
+        super().get_paginate_by(queryset)
+        return self.request.GET.get("paginate_by", self.paginate_by)
+
+
+# list view created for Django Filters
+class BookListViewDF(LoginRequiredMixin, ListView):
+    model = Book
+    template_name = "books/books_df.html"
+    ordering = ["title"]
+    paginate_by = 6
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["filter"] = BookFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
     def get_paginate_by(self, queryset):

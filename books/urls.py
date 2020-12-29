@@ -4,7 +4,7 @@ from books.views import (AuthorCreateView, AuthorDeleteView, AuthorListView,
                          AuthorUpdateView, BookCreateView, BookDeleteView,
                          BookDetailView, BookListView, BookUpdateView,
                          GenreCreateView, GenreDeleteView, GenreListView,
-                         GenreUpdateView)
+                         GenreUpdateView, BookListViewDF)
 
 urlpatterns = [
     path("bookstore/books/", BookListView.as_view(), name="bookstore"),
@@ -40,4 +40,5 @@ urlpatterns = [
         GenreDeleteView.as_view(),
         name="genre-delete",
     ),
+    path("bookstore/books-df/", BookListViewDF.as_view(), name="bookstore_df")
 ]
