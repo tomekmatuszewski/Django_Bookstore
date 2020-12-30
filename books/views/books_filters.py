@@ -1,5 +1,6 @@
 import django_filters
 from django_filters.widgets import RangeWidget
+from django.forms import CheckboxInput
 
 from books.models import Author, Book, Genre
 
@@ -30,6 +31,10 @@ class BookFilter(django_filters.FilterSet):
         field_name="rating",
         widget=RangeWidget(attrs={"class": "textinput textInput form-control"}),
     )
+
+    in_stock = django_filters.BooleanFilter(field_name='in_stock',
+                                            label='In Stock')
+                                            # widget=CheckboxInput)
 
     class Meta:
         model = Book
