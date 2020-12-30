@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin,
                                         UserPassesTestMixin)
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
@@ -11,7 +12,7 @@ from books.forms import BookForm
 from books.models import Author, Book, Genre
 
 from .books_filters import BookFilter, filter_books
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 
 class StaffRequiredMixin(UserPassesTestMixin):
     def test_func(self):
@@ -63,7 +64,7 @@ class BookListViewDF(LoginRequiredMixin, ListView):
     def paginate_filter_queryset(self):
         context = BookFilter(self.request.GET, queryset=self.get_queryset()).qs
         paginate_by = self.get_paginate_by(context)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get("page", 1)
 
         paginator = Paginator(context, paginate_by)
 

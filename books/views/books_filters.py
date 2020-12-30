@@ -1,6 +1,6 @@
 import django_filters
-from django_filters.widgets import RangeWidget
 from django.forms import CheckboxInput
+from django_filters.widgets import RangeWidget
 
 from books.models import Author, Book, Genre
 
@@ -10,7 +10,6 @@ from books.models import Author, Book, Genre
 class BookFilter(django_filters.FilterSet):
 
     CHOICES = (("ascending", "Ascending"), ("descending", "Descending"))
-
 
     title = django_filters.CharFilter(
         label="Title", field_name="title", lookup_expr="icontains"
