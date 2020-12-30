@@ -63,7 +63,7 @@ class BookListViewDF(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["filter"] = BookFilter(self.request.GET, queryset=self.get_queryset())
+        context["filter"] = BookFilter(self.request.GET, queryset=self.get_queryset(), request=self.request.GET)
         return context
 
     def get_paginate_by(self, queryset):
