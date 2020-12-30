@@ -1,5 +1,4 @@
 import django_filters
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django_filters.widgets import RangeWidget
 from django.forms import CheckboxInput
 
@@ -34,10 +33,6 @@ class BookFilter(django_filters.FilterSet):
         widget=RangeWidget(attrs={"class": "textinput textInput form-control"}),
     )
 
-    in_stock = django_filters.BooleanFilter(field_name='in_stock',
-                                            label='In Stock')
-                                            # widget=CheckboxInput)
-
     class Meta:
         model = Book
         fields = ["title", "genre", "author", "rating"]
@@ -47,21 +42,6 @@ class BookFilter(django_filters.FilterSet):
         expression = "price" if value == "ascending" else "-price"
         return queryset.order_by(expression)
 
-    @property
-    def qs(self):
-        parent = super().qs
-        paginate_by = self.request.get('paginate_by', 6)
-        page = self.request.get('page', 1)
-
-        paginator = Paginator(parent, paginate_by)
-
-        try:
-            parent = paginator.page(page)
-        except PageNotAnInteger:
-            parent = paginator.page(1)
-        except EmptyPage:
-            parent = paginator.page(paginator.num_pages)
-        return parent
 
 # own filters
 def filter_rating(min_rating, max_rating):

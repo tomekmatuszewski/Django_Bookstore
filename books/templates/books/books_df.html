@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-
+{% load full_url %}
 
 
     <div class="books col-md-9">
         <div id="book-list" class="row">
-            {% for book in filter.qs %}
+            {% for book in paginated_filter %}
                 <div class="column">
                     <div class="jumbotron">
                         <a class="book-detail-a" href="{% url 'book-details' book.pk %}">{{ book.title|truncatechars:25 }}</a>
@@ -27,9 +27,10 @@
             <form method="GET">
                 <label for="pagination">Books on page</label>
                 <select id="pagination" name="paginate_by" class="form-control">
-                    <option value="6">6</option>
+                    <option value="">----------</option>
                     <option value="1">1</option>
                     <option value="3">3</option>
+                    <option value="6">6</option>
                     <option value="9">9</option>
                     <option value="12">12</option>
                     <option value="18">18</option>
@@ -44,22 +45,22 @@
     <div class="buttons-paginate">
         {% if is_paginated %}
 
-            {% if page_obj.has_previous %}
-                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% if paginated_filter.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="{% full_url 1 'page' request.GET.urlencode %}">First</a>
+                <a class="btn btn-outline-info mb-4" href="{% full_url paginated_filter.previous_page_number 'page' request.GET.urlencode %}">Previous</a>
             {% endif %}
 
-            {% for num in page_obj.paginator.page_range %}
-                {% if page_obj.number == num %}
-                    <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% for num in paginated_filter.paginator.page_range %}
+                {% if paginated_filter.number == num %}
+                    <a class="btn btn-info mb-4" href="{% full_url num 'page' request.GET.urlencode %}">{{ num }}</a>
+                {% elif num > paginated_filter.number|add:'-3' and num < paginated_filter.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4" href="{% full_url num 'page' request.GET.urlencode %}">{{ num }}</a>
                 {% endif %}
             {% endfor %}
 
-            {% if page_obj.has_next %}
-                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% if paginated_filter.has_next %}
+                <a class="btn btn-outline-info mb-4" href="{% full_url paginated_filter.next_page_number 'page' request.GET.urlencode %}">Next</a>
+                <a class="btn btn-outline-info mb-4" href="{% full_url paginated_filter.paginator.num_pages 'page' request.GET.urlencode %}">Last</a>
             {% endif %}
 
         {% endif %}
