@@ -10,6 +10,7 @@ from books.models import Author, Book, Genre
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
 
+from .api_filters import BookApiFilter
 
 class StandardPagination(PageNumberPagination):
     page_size = 5
@@ -21,7 +22,8 @@ class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
-    filter_fields = ["title", "genre__name"]
+    # filter_fields = ["title", "genre__name"]
+    filterset_class = BookApiFilter
     search_fields = ["title", "genre__name", "authors__last_name"]
     pagination_class = StandardPagination
 
