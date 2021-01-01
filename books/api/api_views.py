@@ -7,10 +7,10 @@ from rest_framework.viewsets import ModelViewSet
 
 from books.models import Author, Book, Genre
 
+from .api_filters import BookApiFilter
 from .serializers import (AuthorSerializer, BookMiniSerializer, BookSerializer,
                           GenreSerializer)
 
-from .api_filters import BookApiFilter
 
 class StandardPagination(PageNumberPagination):
     page_size = 5
