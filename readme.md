@@ -2,7 +2,7 @@
 
 Project created in Django
 
-    with :whale: Docker :whale: (go to Bookstrore directory in Terminal):
+    run with Docker (go to Bookstrore directory in Terminal):
     
     - docker-compose build 
     - docker-compose up
