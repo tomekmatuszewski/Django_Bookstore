@@ -5,9 +5,11 @@ Project created in Django
     run with Docker (go to Bookstrore directory in Terminal):
     
     - docker-compose build
-    - create superuser -> from bash e.g.:
-        docker run -it bookstroe_web bash
-    - docker compose up
+    - docker-compose up
+    - docker run -it django_bookstore_web_1 bash
+        - pyhon manage.py migrate
+        - python manage.py loaddata books.json
+        - python manage.py createsuperuser
     - panel admin -> create Group 'Moderators':
         * Moderators -> permissions to add and update Genre, Author, Book
         * stuff -> permissions to all above and delete

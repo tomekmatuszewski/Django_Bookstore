@@ -4,5 +4,4 @@ WORKDIR /bookstore
 COPY requirements.txt /bookstore/
 RUN pip install -r requirements.txt
 COPY . /bookstore
-RUN python manage.py migrate
-RUN python manage.py loaddata books.json
+
