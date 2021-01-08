@@ -2,6 +2,15 @@
 
 Project created in Django
 
+    with :whale: Docker :whale: (go to Bookstrore directory in Terminal):
+    
+    - docker-compose build 
+    - docker-compose up
+    - http://127.0.0.1:8000/home
+    - register and login (superuser must activate new user)
+
+    or manually 
+
     - git clone <repo> .
     - virtualenv venv
     - source venv/bin/activate
