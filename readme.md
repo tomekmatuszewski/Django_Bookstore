@@ -6,7 +6,7 @@ Project created in Django
     
     - docker-compose build
     - docker-compose up
-    - docker run -it django_bookstore_web_1 bash
+    - docker exec -it django_bookstore_web_1 bash
         - pyhon manage.py migrate
         - python manage.py loaddata books.json
         - python manage.py createsuperuser
